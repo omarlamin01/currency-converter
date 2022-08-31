@@ -4,7 +4,7 @@
       <h1>Music player</h1>
     </header>
     <main>
-		
+		{{ currencies }}
 	</main>
   </div>
 </template>
