@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <header>
-      <h1>Music player</h1>
+      <h1>Currency converter</h1>
     </header>
     <main>
 		{{ currencies }}
@@ -10,13 +10,15 @@
 </template>
 
 <script>
-
+/* eslint-disable */
 import currencies from '@/assets/data/currencies.json';
 
 export default {
 	name: "App",
 	data() {
-		return {};
+		return {
+			currencies: JSON.parse(currencies),
+		};
 	},
 	methods: {},
 	watch: {},
