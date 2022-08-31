@@ -11,6 +11,8 @@
 
 <script>
 
+import currencies from '@/assets/data/currencies.json';
+
 export default {
 	name: "App",
 	data() {
