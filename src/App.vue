@@ -17,6 +17,7 @@ export default {
 		return {};
 	},
 	methods: {},
+	watch: {},
 	created() {},
 	};
 </script>
