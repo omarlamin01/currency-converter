@@ -4,7 +4,13 @@
       <h1>Currency converter</h1>
     </header>
     <main>
-		<currencyInput :name="currencies.name" :country="currencies.country" :countryFlag="currencies.countryFlag" />
+		<currencyInput 
+			class="currencyInput" 
+			:name="currencies.name" 
+			:country="currencies.country" 
+			:countryFlag="currencies.countryFlag"
+			:value="inputValue"
+		/>
 	</main>
   </div>
 </template>
@@ -19,6 +25,7 @@ export default {
 	data() {
 		return {
 			currencies: currencies.currencies[0],
+			inputValue: 12,
 		};
 	},
 	methods: {},
@@ -47,5 +54,15 @@ header {
 	padding: 20px;
 	background-color: #212121;
 	color: #fff;
+}
+main {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+.currencyInput {
+	min-width: 580px;
+	max-width: 800px;
 }
 </style>
