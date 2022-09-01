@@ -4,13 +4,12 @@
       <h1>Currency converter</h1>
     </header>
     <main>
-		<div v-for="(value, key) in currenciesList" :key="key">
+		<div v-for="(value, key) in activeCurrencies" :key="key">
 			<currencyInput 
 				class="currencyInput" 
-				:name="currenciesList[key].name" 
-				:country="currenciesList[key].country" 
-				:countryFlag="currenciesList[key].countryFlag"
-				:value="inputValue"
+				:name="activeCurrencies[key].name" 
+				:country="activeCurrencies[key].country" 
+				:countryFlag="activeCurrencies[key].countryFlag"
 			/>
 		</div>
 	</main>
@@ -19,15 +18,16 @@
 
 <script>
 /* eslint-disable */
-import currencies from "@/assets/data/currencies.json";
+import data from "@/assets/data/currencies.json";
 import currencyInput from "@/components/currencyInput.vue"
 
 export default {
 	name: "App",
 	data() {
 		return {
-			currenciesList: currencies.currencies,
-			inputValue: 12,
+			currenciesList: data.currencies,
+			activeCurrencies: data.activeCurrencies,
+			inputValue:  0,
 		};
 	},
 	methods: {},
@@ -35,7 +35,14 @@ export default {
 		currencyInput
 	},
 	watch: {},
-	created() {},
+	created() {
+		if (this.activeCurrencies.length < 2) {
+			this.activeCurrencies = [];
+			this.activeCurrencies.push(this.currenciesList[0]);
+			this.activeCurrencies.push(this.currenciesList[1]);
+		}
+		
+	},
 	};
 </script>
 
