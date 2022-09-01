@@ -4,8 +4,7 @@
       <h1>Currency converter</h1>
     </header>
     <main>
-		<h1>{{ currencies.name }}</h1>
-		<h1>{{ currencies.country }}</h1>
+		<currencyInput :name="currencies.name" :country="currencies.country" :countryFlag="currencies.countryFlag" />
 	</main>
   </div>
 </template>
@@ -23,6 +22,9 @@ export default {
 		};
 	},
 	methods: {},
+	components: {
+		currencyInput
+	},
 	watch: {},
 	created() {},
 	};

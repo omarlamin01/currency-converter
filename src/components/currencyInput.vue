@@ -1,8 +1,8 @@
 <template>
     <div class="input">
         <div class="left-box">
-            <img :src="currency.countryFlag" :alt="'flag of ' + currency.country">
-            <span id="currency-name">{{ currency.name }}</span>
+            <span id="currency-name">{{ name }}</span>
+            <span id="currency-country">{{ country }}</span>
         </div>
         <div class="right-box">
             <input type="number" v-model="model">
@@ -23,7 +23,9 @@ export default
         };
     },
     props: {
-        currency,
+        name: String,
+        country: String,
+        countryFlag: String,
     },
 };
 
