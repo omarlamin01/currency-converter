@@ -35,6 +35,7 @@ export default
     background-color: #212121;
     color: white;
     border-radius: 9px;
+    justify-content: space-between;
 }
 .left-box {
     display: flex;
@@ -62,6 +63,7 @@ export default
     flex-direction: column;
     margin-left: 16px;
     margin-right: 16px;
+    width: 50%;
 }
 .right-box input[type="number"] {
     margin-right: 0;
@@ -73,6 +75,6 @@ export default
     border: none;
     background: transparent;
     height: 100%;
-    width: 100%;
+    width: 50%;
 }
 </style>
