@@ -1,58 +1,88 @@
-{"currencies" : [
-    {
-        "id" : 1,
-        "name" : "Dirham",
-        "symbole" : "MAD",
-        "country" : "Morocco",
-        "countryFlag" : "Morocco",
-        "valueToUSD" : 10.54
-    },
-    {
-        "id" : 2,
-        "name" : "Dollar",
-        "symbole" : "USD",
-        "country" : "United States",
-        "countryFlag" : "United-States-of-America",
-        "valueToUSD" : 1
-    },
-    {
-        "id" : 3,
-        "name" : "Euro",
-        "symbole" : "EURO",
-        "country" : "European Union",
-        "countryFlag" : "European-Union",
-        "valueToUSD" : 1.1
-    },
-    {
-        "id" : 4,
-        "name" : "Dinar",
-        "symbole" : "TUD",
-        "country" : "Tunisia",
-        "countryFlag" : "Tunisia",
-        "valueToUSD" : 3.2
-    },
-    {
-        "id" : 5,
-        "name" : "Pound",
-        "symbole" : "EGP",
-        "country" : "Egypt",
-        "countryFlag" : "Egypt",
-        "valueToUSD" : 19.21
-    },
-    {
-        "id" : 6,
-        "name" : "Lira",
-        "symbole" : "TUL",
-        "country" : "Turkey",
-        "countryFlag" : "Turkey",
-        "valueToUSD" : 18.18
-    },
-    {
-        "id" : 7,
-        "name" : "Dirham",
-        "symbole" : "AED",
-        "country" : "United Arab Emirates",
-        "countryFlag" : "United-Arab-Emirates",
-        "valueToUSD" : 3.67
-    }
-]}
+{
+    "currencies" : 
+    [
+        {
+            "id" : 1,
+            "name" : "Dirham",
+            "symbole" : "MAD",
+            "country" : "Morocco",
+            "countryFlag" : "Morocco",
+            "valueToUSD" : 10.54
+        },
+        {
+            "id" : 2,
+            "name" : "Dollar",
+            "symbole" : "USD",
+            "country" : "United States",
+            "countryFlag" : "United-States-of-America",
+            "valueToUSD" : 1
+        },
+        {
+            "id" : 3,
+            "name" : "Euro",
+            "symbole" : "EURO",
+            "country" : "European Union",
+            "countryFlag" : "European-Union",
+            "valueToUSD" : 1.1
+        },
+        {
+            "id" : 4,
+            "name" : "Dinar",
+            "symbole" : "TUD",
+            "country" : "Tunisia",
+            "countryFlag" : "Tunisia",
+            "valueToUSD" : 3.2
+        },
+        {
+            "id" : 5,
+            "name" : "Pound",
+            "symbole" : "EGP",
+            "country" : "Egypt",
+            "countryFlag" : "Egypt",
+            "valueToUSD" : 19.21
+        },
+        {
+            "id" : 6,
+            "name" : "Lira",
+            "symbole" : "TUL",
+            "country" : "Turkey",
+            "countryFlag" : "Turkey",
+            "valueToUSD" : 18.18
+        },
+        {
+            "id" : 7,
+            "name" : "Dirham",
+            "symbole" : "AED",
+            "country" : "United Arab Emirates",
+            "countryFlag" : "United-Arab-Emirates",
+            "valueToUSD" : 3.67
+        }
+    ],
+    "activeCurrencies" : 
+    [
+        {
+            "id" : 1,
+            "name" : "Dirham",
+            "symbole" : "MAD",
+            "country" : "Morocco",
+            "countryFlag" : "Morocco",
+            "valueToUSD" : 10.54
+        },
+        {
+            "id" : 5,
+            "name" : "Pound",
+            "symbole" : "EGP",
+            "country" : "Egypt",
+            "countryFlag" : "Egypt",
+            "valueToUSD" : 19.21
+        },
+        {
+            "id" : 2,
+            "name" : "Dollar",
+            "symbole" : "USD",
+            "country" : "United States",
+            "countryFlag" : "United-States-of-America",
+            "valueToUSD" : 1
+        }
+    ]
+}
