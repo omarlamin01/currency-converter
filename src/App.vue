@@ -12,7 +12,8 @@
 
 <script>
 /* eslint-disable */
-import currencies from '@/assets/data/currencies.json';
+import currencies from "@/assets/data/currencies.json";
+import currencyInput from "@/components/currencyInput.vue"
 
 export default {
 	name: "App",
