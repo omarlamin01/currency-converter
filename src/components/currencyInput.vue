@@ -6,7 +6,7 @@
         </div>
         <div class="right-box">
             <!-- eslint-disable-next-line -->
-            <input type="number" v-model="value">
+            {{slot}}
         </div>
     </div>
 </template>
@@ -16,11 +16,13 @@
 export default 
 {
     name: "currencyInput",
+    methods: {},
     props: {
         name: String,
         country: String,
         countryFlag: String,
-        value: Float64Array,
+        value: Number,
+        slot: HTMLInputElement
     },
 };
 
