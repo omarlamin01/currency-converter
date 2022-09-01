@@ -1,19 +1,29 @@
 <template>
-  <div id="app">
-    <header>
-      <h1>Currency converter</h1>
-    </header>
-    <main>
-		<div v-for="(value, key) in activeCurrencies" :key="key">
-			<currencyInput 
-				class="currencyInput" 
-				:name="activeCurrencies[key].name" 
-				:country="activeCurrencies[key].country" 
-				:countryFlag="activeCurrencies[key].countryFlag"
-			/>
-		</div>
-	</main>
-  </div>
+<!-- eslint-disable -->
+	<div id="app">
+		<header>
+		<h1>Currency converter</h1>
+		</header>
+		<main>
+			<div v-for="(value, key) in activeCurrencies" :key="key">
+				<currencyInput 
+					class="currencyInput" 
+					:name="activeCurrencies[key].name" 
+					:country="activeCurrencies[key].country" 
+					:countryFlag="activeCurrencies[key].countryFlag"
+				>
+					<!-- eslint-disable-next-line -->
+					<template slot="input">
+						<input
+							type="number"
+							v-model="inputValue"
+						>
+					</template>
+					
+				</currencyInput>
+			</div>
+		</main>
+  	</div>
 </template>
 
 <script>
