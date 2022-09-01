@@ -67,6 +67,11 @@ export default
     margin-right: 0;
     margin-left: auto;
     text-align: end;
+    font-size: 32px;
+    color: white;
+    outline: none;
+    border: none;
+    background: transparent;
     height: 100%;
     width: 100%;
 }
