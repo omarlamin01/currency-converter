@@ -4,7 +4,8 @@
       <h1>Currency converter</h1>
     </header>
     <main>
-		{{ currencies }}
+		<h1>{{ currencies.name }}</h1>
+		<h1>{{ currencies.country }}</h1>
 	</main>
   </div>
 </template>
@@ -17,7 +18,7 @@ export default {
 	name: "App",
 	data() {
 		return {
-			currencies: JSON.parse(currencies),
+			currencies: currencies.currencies[0],
 		};
 	},
 	methods: {},
