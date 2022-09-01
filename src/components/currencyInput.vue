@@ -1,3 +1,4 @@
+<!-- eslint-disable -->
 <template>
     <div id="input">
         <div class="left-box">
@@ -5,8 +6,7 @@
             <span id="currency-country">{{ country }}</span>
         </div>
         <div class="right-box">
-            <!-- eslint-disable-next-line -->
-            {{slot}}
+            <slot name="input" />
         </div>
     </div>
 </template>
@@ -21,8 +21,6 @@ export default
         name: String,
         country: String,
         countryFlag: String,
-        value: Number,
-        slot: HTMLInputElement
     },
 };
 
