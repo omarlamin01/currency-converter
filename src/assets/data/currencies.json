@@ -11,7 +11,7 @@
         "id" : 2,
         "name" : "Dollar",
         "symbole" : "USD",
-        "country" : "United States of America",
+        "country" : "United States",
         "countryFlag" : "United-States-of-America",
         "valueToUSD" : 1
     },
