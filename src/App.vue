@@ -4,13 +4,15 @@
       <h1>Currency converter</h1>
     </header>
     <main>
-		<currencyInput 
-			class="currencyInput" 
-			:name="currencies.name" 
-			:country="currencies.country" 
-			:countryFlag="currencies.countryFlag"
-			:value="inputValue"
-		/>
+		<div v-for="(value, key) in currenciesList" :key="key">
+			<currencyInput 
+				class="currencyInput" 
+				:name="currenciesList[key].name" 
+				:country="currenciesList[key].country" 
+				:countryFlag="currenciesList[key].countryFlag"
+				:value="inputValue"
+			/>
+		</div>
 	</main>
   </div>
 </template>
@@ -24,7 +26,7 @@ export default {
 	name: "App",
 	data() {
 		return {
-			currencies: currencies.currencies[0],
+			currenciesList: currencies.currencies,
 			inputValue: 12,
 		};
 	},
@@ -63,6 +65,6 @@ main {
 }
 .currencyInput {
 	min-width: 580px;
-	max-width: 800px;
+	max-width: 580px;
 }
 </style>
