@@ -128,7 +128,7 @@ export default {
 				this.values.push(1);
 				this.dropDowns.push(false);
 			}
-			
+			this.newDropDown = false;
 		},
 		convertOnce(from, to) {
 			this.values[to] = (this.values[from] / this.activeCurrencies[from].valueToUSD) * this.activeCurrencies[to].valueToUSD;
