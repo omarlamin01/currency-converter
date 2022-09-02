@@ -73,10 +73,10 @@ export default {
 	data() {
 		return {
 			currenciesList: data.currencies,
-			activeCurrenciy1: [],
-			activeCurrenciy2: [],
+			activeCurrenciy1: null,
+			activeCurrenciy2: null,
 			currencyInput1:  1,
-			currencyInput2:  0,
+			currencyInput2:  null,
 			showDropDown1: false,
 			showDropDown2: false,
 		};
@@ -94,7 +94,7 @@ export default {
 		filterCurrencies() {
 			let newArr = [];
 			this.currenciesList.forEach(element => {
-				if (this.activeCurrenciy2 != []) {
+				if (this.activeCurrenciy2 != null) {
 					if (element.id != this.activeCurrenciy1.id && element.id != this.activeCurrenciy2.id)
 					newArr.push(element);
 				} else {
@@ -120,7 +120,6 @@ export default {
 	watch: {
 		converterA(currencyInput1) {
 			this.currencyInput2 = activeCurrenciy2.valueToUSD * (this.currencyInput1 / activeCurrenciy1.valueToUSD);
-			console.log(this.currencyInput2);
 		},
 		converterB(currencyInput2) {
 			this.currencyInput1 = activeCurrenciy1.valueToUSD * (this.currencyInput2 / activeCurrenciy2.valueToUSD);
@@ -128,8 +127,8 @@ export default {
 	},
 	created() {
 		//set random currencies
-		this.activeCurrenciy1 = this.currenciesList[Math.random(0, (this.currenciesList.length - 1))];
-		this.activeCurrenciy2 = this.currenciesList[Math.random(0, (this.filterCurrencies().length - 1))];
+		this.activeCurrenciy1 = this.currenciesList[Math.floor(Math.random() * this.currenciesList.length)];
+		this.activeCurrenciy2 = this.currenciesList[Math.floor(Math.random() * this.filterCurrencies().length)];
 
 		//format inputs
 		this.currencyInput1 = this.formatNumber(this.currencyInput1, 2);
