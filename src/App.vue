@@ -73,10 +73,10 @@ export default {
 	data() {
 		return {
 			currenciesList: data.currencies,
-			activeCurrenciy1: data.currencies[0],
-			activeCurrenciy2: data.currencies[1],
-			currencyInput1:  10,
-			currencyInput2:  1,
+			activeCurrenciy1: [],
+			activeCurrenciy2: [],
+			currencyInput1:  1,
+			currencyInput2:  0,
 			showDropDown1: false,
 			showDropDown2: false,
 		};
@@ -94,8 +94,14 @@ export default {
 		filterCurrencies() {
 			let newArr = [];
 			this.currenciesList.forEach(element => {
-				if (element.id != this.activeCurrenciy1.id && element.id != this.activeCurrenciy2.id)
+				if (this.activeCurrenciy2 != []) {
+					if (element.id != this.activeCurrenciy1.id && element.id != this.activeCurrenciy2.id)
 					newArr.push(element);
+				} else {
+					if (element.id != this.activeCurrenciy1.id)
+					newArr.push(element);
+				}
+				
 			});
 			return newArr;
 		},
@@ -121,8 +127,13 @@ export default {
 		}
 	},
 	created() {
+		//set random currencies
+		this.activeCurrenciy1 = this.currenciesList[Math.random(0, (this.currenciesList.length - 1))];
+		this.activeCurrenciy2 = this.currenciesList[Math.random(0, (this.filterCurrencies().length - 1))];
+
+		//format inputs
 		this.currencyInput1 = this.formatNumber(this.currencyInput1, 2);
-		this.currencyInput2 = this.formatNumber(this.currencyInput2, 2);
+		this.converterA();
 	},
 	};
 </script>
@@ -209,6 +220,7 @@ main {
 .drop-down {
 	max-height: 305px;
 	overflow-y: auto;
+	margin-top: 12px;
 }
 .element {
 	background-color: #212121;
