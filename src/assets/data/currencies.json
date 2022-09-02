@@ -72,7 +72,134 @@
             "country" : "Libya",
             "countryFlag" : "Libya",
             "valueToUSD" : 4.92
+        },
+        {
+            "id" : 10,
+            "name" : "Riyal",
+            "symbole" : "SAR",
+            "country" : "Saudi Arabia",
+            "countryFlag" : "Saudi-Arabia",
+            "valueToUSD" : 3.76
+        },
+        {
+            "id" : 11,
+            "name" : "Riyal",
+            "symbole" : "QAR",
+            "country" : "Qatar",
+            "countryFlag" : "Qatar",
+            "valueToUSD" : 3.64
+        },
+        {
+            "id" : 12,
+            "name" : "Pound",
+            "symbole" : "SYP",
+            "country" : "Syria",
+            "countryFlag" : "Syria",
+            "valueToUSD" : 2512.53
+        },
+        {
+            "id" : 13,
+            "name" : "Dinar",
+            "symbole" : "JOD",
+            "country" : "Jordan",
+            "countryFlag" : "Jordan",
+            "valueToUSD" : 0.71
+        },
+        {
+            "id" : 14,
+            "name" : "Dinar",
+            "symbole" : "KUD",
+            "country" : "Kuwait",
+            "countryFlag" : "Kuwait",
+            "valueToUSD" : 0.31
+        },
+        {
+            "id" : 15,
+            "name" : "Dinar",
+            "symbole" : "IRD",
+            "country" : "Iraq",
+            "countryFlag" : "Iraq",
+            "valueToUSD" : 1456.5
+        },
+        {
+            "id" : 16,
+            "name" : "Dinar",
+            "symbole" : "BAD",
+            "country" : "Bahrain",
+            "countryFlag" : "Bahrain",
+            "valueToUSD" : 0.38
+        },
+        {
+            "id" : 17,
+            "name" : "Rial",
+            "symbole" : "OMR",
+            "country" : "Oman",
+            "countryFlag" : "Oman",
+            "valueToUSD" : 0.39
+        },
+        {
+            "id" : 18,
+            "name" : "Pound",
+            "symbole" : "LEP",
+            "country" : "Lebanon",
+            "countryFlag" : "Lebanon",
+            "valueToUSD" : 1508.94
+        },
+        {
+            "id" : 19,
+            "name" : "Shekel",
+            "symbole" : "ISH",
+            "country" : "Israel",
+            "countryFlag" : "Israel",
+            "valueToUSD" : 3.32
+        },
+        {
+            "id" : 20,
+            "name" : "Franc",
+            "symbole" : "DFR",
+            "country" : "Djibouti",
+            "countryFlag" : "Djibouti",
+            "valueToUSD" : 177.66
+        },
+        {
+            "id" : 21,
+            "name" : "Shilling",
+            "symbole" : "SSH",
+            "country" : "Somalia",
+            "countryFlag" : "Somalia",
+            "valueToUSD" : 567.32
+        },
+        {
+            "id" : 22,
+            "name" : "Yuan",
+            "symbole" : "CHY",
+            "country" : "China",
+            "countryFlag" : "China",
+            "valueToUSD" : 6.92
+        },
+        {
+            "id" : 23,
+            "name" : "Ruble",
+            "symbole" : "RBL",
+            "country" : "Russia",
+            "countryFlag" : "Russia",
+            "valueToUSD" : 61.75
+        },
+        {
+            "id" : 24,
+            "name" : "Yen",
+            "symbole" : "JPY",
+            "country" : "Japan",
+            "countryFlag" : "Japan",
+            "valueToUSD" : 138.49
+        },
+        {
+            "id" : 25,
+            "name" : "Won",
+            "symbole" : "SKW",
+            "country" : "South Korea",
+            "countryFlag" : "South-Korea",
+            "valueToUSD" : 1347.97
         }
-        
     ]
 }
