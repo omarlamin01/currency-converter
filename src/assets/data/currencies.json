@@ -57,32 +57,5 @@
             "countryFlag" : "United-Arab-Emirates",
             "valueToUSD" : 3.67
         }
-    ],
-    "activeCurrencies" : 
-    [
-        {
-            "id" : 1,
-            "name" : "Dirham",
-            "symbole" : "MAD",
-            "country" : "Morocco",
-            "countryFlag" : "Morocco",
-            "valueToUSD" : 10.54
-        },
-        {
-            "id" : 5,
-            "name" : "Pound",
-            "symbole" : "EGP",
-            "country" : "Egypt",
-            "countryFlag" : "Egypt",
-            "valueToUSD" : 19.21
-        },
-        {
-            "id" : 2,
-            "name" : "Dollar",
-            "symbole" : "USD",
-            "country" : "United States",
-            "countryFlag" : "United-States-of-America",
-            "valueToUSD" : 1
-        }
     ]
 }
