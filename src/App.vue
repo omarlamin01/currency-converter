@@ -6,61 +6,44 @@
 		</header>
 		<main>
 			<!------------------------------>
-			<div class="converter">
+			<div class="converter" v-for="(active, key) in activeCurrencies" :key="key">
 				<div class="input">
-					<div class="left-box" @click="showDropDown1 = !showDropDown1">
-						<span class="currency-name">{{ activeCurrenciy1.name }}</span>
-						<span class="currency-country">{{ activeCurrenciy1.country }}</span>
+					<div class="left-box" @click="dropDowns[key] = !dropDowns[key]">
+						<span class="currency-name">{{ active.name }}</span>
+						<span class="currency-country">{{ active.country }}</span>
 					</div>
 					<div class="right-box">
 						<input
-							type="number"
-							min="0"
-							v-model="currencyInput1"
-							@change="converterA"
+							type="text"
+							v-model="values[key]"
+							@change="convertCurrencies(active, key)"
 						>
 					</div>
 				</div>
-				<div class="drop-down" v-show="showDropDown1">
+				<div class="drop-down" v-show="dropDowns[key]">
 					<div
 						class="element"
 						v-for="currency in filterCurrencies()"
-						@click="setCurrency1(currency)"
+						@click="setCurrency(key, currency)"
 					>
 						<span class="currency-name">{{ currency.name }}</span>
 						<span class="currency-country"> - ({{ currency.country }})</span>
 					</div>
 				</div>
 			</div>
-			<!------------------------------>
-			<div class="converter">
-				<div class="input">
-					<div class="left-box" @click="showDropDown2 = !showDropDown2">
-						<span class="currency-name">{{ activeCurrenciy2.name }}</span>
-						<span class="currency-country">{{ activeCurrenciy2.country }}</span>
-					</div>
-					<div class="right-box">
-						<input 
-							type="number"
-							min="0"
-							maxlength="4"
-							v-model="currencyInput2"
-							@change="converterB"
-						>
-					</div>
-				</div>
-				<div class="drop-down" v-show="showDropDown2">
+			<div class="add-button">
+				<div class="btn" @click="newDropDown = !newDropDown">+ add</div>
+				<div class="drop-down" v-show="newDropDown">
 					<div
 						class="element"
-						v-for="currency in filterCurrencies(activeCurrenciy2.id)"
-						@click="setCurrency2(currency)"
+						v-for="currency in filterCurrencies()"
+						@click="addCurrency(currency)"
 					>
 						<span class="currency-name">{{ currency.name }}</span>
 						<span class="currency-country"> - ({{ currency.country }})</span>
 					</div>
 				</div>
 			</div>
-			
 		</main>
   	</div>
 </template>
@@ -75,78 +58,100 @@ export default {
 	data() {
 		return {
 			currenciesList: data.currencies,
-			activeCurrenciy1: null,
-			activeCurrenciy2: null,
-			currencyInput1:  1,
-			currencyInput2:  null,
-			showDropDown1: false,
-			showDropDown2: false,
+			activeCurrencies: [],
+			values: [],
+			dropDowns: [],
+			newDropDown: false,
 		};
 	},
 	methods: {
 		formatNumber(number, digits) {
 			let floor = parseInt(number);
 			let float = parseInt((number - floor) * Math.pow(10, digits))
+			let arr = floor.toString().split('');
+			if (arr.length > 3) {
+				floor = "";
+				let j = 0;
+				for(let i = arr.length - 1; i > -1; i--) {
+					if (j < 3) {
+						floor = arr[i] + floor;
+						j++;
+					} else {
+						floor = ',' + floor;
+						j = 0;
+					}
+					console.log(floor);
+				}
+			}
+			
 			if (float < Math.pow(10, (digits - 1))) {
 				return (floor + '.' + float + '0');
 			} else {
 				return (floor + '.' + float);
 			}
 		},
-		filterCurrencies() {
+		filterOnce(target) {
 			let newArr = [];
-			this.currenciesList.forEach(element => {
-				if (this.activeCurrenciy2 != null) {
-					if (element.id != this.activeCurrenciy1.id && element.id != this.activeCurrenciy2.id)
-					newArr.push(element);
-				} else {
-					if (element.id != this.activeCurrenciy1.id)
-					newArr.push(element);
+			let index = 0;
+			this.activeCurrencies.forEach(element => {
+				if (element.id != target.id) {
+					newArr.push({
+						el: element,
+						position: index
+					});
 				}
-				
+				index++;
 			});
 			return newArr;
 		},
-		converterA() {
-			this.currencyInput1 = this.formatNumber(this.currencyInput1, 2);
-			this.currencyInput2 = this.formatNumber((this.activeCurrenciy2.valueToUSD * (this.currencyInput1 / this.activeCurrenciy1.valueToUSD)), 2);
+		filterCurrencies() {
+			let newArr = [];
+			this.currenciesList.forEach(element => {
+				let isContained = false;
+				this.activeCurrencies.forEach(target => {
+					if (element.id == target.id)
+						isContained = true;
+				});
+				if (!isContained) {
+					newArr.push(element);
+				}
+			})
+			return newArr;
 		},
-		converterB() {
-			this.currencyInput2 = this.formatNumber(this.currencyInput2, 2);
-			this.currencyInput1 = this.formatNumber((this.activeCurrenciy1.valueToUSD * (this.currencyInput2 / this.activeCurrenciy2.valueToUSD)), 2);
+		addCurrency(currency) {
+			if (this.activeCurrencies.length > 0) {
+				this.activeCurrencies.push(currency);
+				this.values.push(this.convertOnce(0, this.activeCurrencies.length - 1));
+				this.dropDowns.push(false);
+			} else {
+				this.activeCurrencies.push(currency);
+				this.values.push(1);
+				this.dropDowns.push(false);
+			}
+			
 		},
-		setCurrency1(currency) {
-			this.activeCurrenciy1 = currency;
-			this.converterB();
-			this.showDropDown1 = false;
+		convertOnce(from, to) {
+			this.values[to] = (this.values[from] / this.activeCurrencies[from].valueToUSD) * this.activeCurrencies[to].valueToUSD;
 		},
-		setCurrency2(currency) {
-			this.activeCurrenciy2 = currency;
-			this.converterA();
-			this.showDropDown2 = false;
+		convertCurrencies(from, position) {
+			this.filterOnce(from).forEach(element => {
+				this.convertOnce(position, element.position);
+			})
+		},
+		setCurrency(position, newCurrency) {
+			this.activeCurrencies[position] = newCurrency;
+			this.values[position] = this.convertOnce(0, position);
+			this.dropDowns[position] = false;
 		}
 	},
 	components: {
 		currencyInput
 	},
-	watch: {
-		converterA(currencyInput1) {
-			this.currencyInput2 = activeCurrenciy2.valueToUSD * (this.currencyInput1 / activeCurrenciy1.valueToUSD);
-		},
-		converterB(currencyInput2) {
-			this.currencyInput1 = activeCurrenciy1.valueToUSD * (this.currencyInput2 / activeCurrenciy2.valueToUSD);
-		}
-	},
 	created() {
-		//set random currencies
-		this.activeCurrenciy1 = this.currenciesList[Math.floor(Math.random() * this.currenciesList.length)];
-		this.activeCurrenciy2 = this.currenciesList[Math.floor(Math.random() * this.filterCurrencies().length)];
-
-		//format inputs
-		this.currencyInput1 = this.formatNumber(1, 2);
-		this.converterA();
+		this.addCurrency(this.currenciesList[Math.floor(Math.random() * this.currenciesList.length)]);
+		this.addCurrency(this.currenciesList[Math.floor(Math.random() * this.currenciesList.length)]);
 	},
-	};
+};
 </script>
 
 <style scoped>
@@ -218,7 +223,7 @@ main {
     margin-right: 16px;
     width: 50%;
 }
-.right-box input[type="number"] {
+.right-box input {
     margin-right: 0;
     margin-left: auto;
     text-align: end;
@@ -234,6 +239,19 @@ main {
 	max-height: 305px;
 	overflow-y: auto;
 	margin-top: 12px;
+}
+.drop-down::-webkit-scrollbar {
+  width: 8px;
+}
+
+.drop-down::-webkit-scrollbar-track {
+  background: #f4f7f8;
+  border-radius: 0 8px 8px 0;
+}
+
+.drop-down::-webkit-scrollbar-thumb {
+  background: #5fcf80;
+  border-radius: 4px;
 }
 .element {
 	background-color: #212121;
