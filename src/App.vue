@@ -25,6 +25,7 @@
 					<div
 						class="element"
 						v-for="currency in filterCurrencies()"
+						@click="setCurrency1(currency)"
 					>
 						<span class="currency-name">{{ currency.name }}</span>
 						<span class="currency-country"> - ({{ currency.country }})</span>
@@ -52,6 +53,7 @@
 					<div
 						class="element"
 						v-for="currency in filterCurrencies(activeCurrenciy2.id)"
+						@click="setCurrency2(currency)"
 					>
 						<span class="currency-name">{{ currency.name }}</span>
 						<span class="currency-country"> - ({{ currency.country }})</span>
@@ -112,6 +114,16 @@ export default {
 		converterB() {
 			this.currencyInput2 = this.formatNumber(this.currencyInput2, 2);
 			this.currencyInput1 = this.formatNumber((this.activeCurrenciy1.valueToUSD * (this.currencyInput2 / this.activeCurrenciy2.valueToUSD)), 2);
+		},
+		setCurrency1(currency) {
+			this.activeCurrenciy1 = currency;
+			this.converterB();
+			this.showDropDown1 = false;
+		},
+		setCurrency2(currency) {
+			this.activeCurrenciy2 = currency;
+			this.converterA();
+			this.showDropDown2 = false;
 		}
 	},
 	components: {
@@ -131,7 +143,7 @@ export default {
 		this.activeCurrenciy2 = this.currenciesList[Math.floor(Math.random() * this.filterCurrencies().length)];
 
 		//format inputs
-		this.currencyInput1 = this.formatNumber(this.currencyInput1, 2);
+		this.currencyInput1 = this.formatNumber(1, 2);
 		this.converterA();
 	},
 	};
@@ -146,6 +158,7 @@ export default {
 	color: #2c3e50;
 	padding: 0;
 	margin: 0;
+	height: 100vh;
 }
 header {
 	display: flex;
@@ -160,6 +173,7 @@ main {
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
+	margin-top: 20px;
 }
 .converter {
 	margin: 8px;
