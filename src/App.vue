@@ -8,7 +8,7 @@
 			<!------------------------------>
 			<div class="converter">
 				<div class="input">
-					<div class="left-box">
+					<div class="left-box" @click="showDropDown1 = !showDropDown1">
 						<span class="currency-name">{{ activeCurrenciy1.name }}</span>
 						<span class="currency-country">{{ activeCurrenciy1.country }}</span>
 					</div>
@@ -21,10 +21,10 @@
 						>
 					</div>
 				</div>
-				<div class="drop-down">
+				<div class="drop-down" v-show="showDropDown1">
 					<div
 						class="element"
-						v-for="currency in currenciesList"
+						v-for="currency in filterCurrencies()"
 					>
 						<span class="currency-name">{{ currency.name }}</span>
 						<span class="currency-country"> - ({{ currency.country }})</span>
@@ -34,7 +34,7 @@
 			<!------------------------------>
 			<div class="converter">
 				<div class="input">
-					<div class="left-box">
+					<div class="left-box" @click="showDropDown2 = !showDropDown2">
 						<span id="currency-name">{{ activeCurrenciy2.name }}</span>
 						<span id="currency-country">{{ activeCurrenciy2.country }}</span>
 					</div>
@@ -48,10 +48,10 @@
 						>
 					</div>
 				</div>
-				<div class="drop-down">
+				<div class="drop-down" v-show="showDropDown2">
 					<div
 						class="element"
-						v-for="currency in currenciesList"
+						v-for="currency in filterCurrencies(activeCurrenciy2.id)"
 					>
 						<span class="currency-name">{{ currency.name }}</span>
 						<span class="currency-country"> - ({{ currency.country }})</span>
@@ -77,6 +77,8 @@ export default {
 			activeCurrenciy2: data.currencies[1],
 			currencyInput1:  10,
 			currencyInput2:  1,
+			showDropDown1: false,
+			showDropDown2: false,
 		};
 	},
 	methods: {
@@ -88,6 +90,14 @@ export default {
 			} else {
 				return (floor + '.' + float);
 			}
+		},
+		filterCurrencies() {
+			let newArr = [];
+			this.currenciesList.forEach(element => {
+				if (element.id != this.activeCurrenciy1.id && element.id != this.activeCurrenciy2.id)
+					newArr.push(element);
+			});
+			return newArr;
 		},
 		converterA() {
 			this.currencyInput1 = this.formatNumber(this.currencyInput1, 2);
@@ -196,5 +206,6 @@ main {
 }
 .element {
 	background-color: #212121;
+	cursor: pointer;
 }
 </style>
