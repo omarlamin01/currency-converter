@@ -16,6 +16,7 @@
 						<input
 							type="text"
 							v-model="values[key]"
+							:value="formatNumber(values[key], 2)"
 							@change="convertCurrencies(active, key)"
 						>
 					</div>
@@ -35,8 +36,8 @@
 				</div>
 			</div>
 			<div class="add-button">
-				<div class="btn" @click="newDropDown = !newDropDown">+ add</div>
-				<div class="drop-down" v-show="newDropDown">
+				<div class="btn" @click="showAddCurrencyDropDown = !showAddCurrencyDropDown">+ add</div>
+				<div class="drop-down" v-show="showAddCurrencyDropDown">
 					<div
 						class="element"
 						v-for="currency in filterCurrencies()"
@@ -64,7 +65,7 @@ export default {
 			activeCurrencies: [],
 			values: [],
 			dropDowns: [],
-			newDropDown: false,
+			showAddCurrencyDropDown: false,
 		};
 	},
 	methods: {
@@ -124,14 +125,14 @@ export default {
 		addCurrency(currency) {
 			if (this.activeCurrencies.length > 0) {
 				this.activeCurrencies.push(currency);
-				this.values.push(this.convertOnce(0, this.activeCurrencies.length - 1));
+				this.values.push(formatNumber(this.convertOnce(0, this.activeCurrencies.length - 1), 2));
 				this.dropDowns.push(false);
 			} else {
 				this.activeCurrencies.push(currency);
-				this.values.push(1);
+				this.values.push(1.00);
 				this.dropDowns.push(false);
 			}
-			this.newDropDown = false;
+			this.showAddCurrencyDropDown = false;
 		},
 		removeCurrency(currency) {
 			this.activeCurrencies.pop(currency)
@@ -215,7 +216,7 @@ main {
     margin-left: 0;
 }
 .currency-country {
-    color: rgba(255, 255, 255, 0.7);
+    color: #5fcf80;
     font-size: 24px;
     font-weight: 300;
     text-align: start;
@@ -251,8 +252,8 @@ main {
 }
 
 .drop-down::-webkit-scrollbar-track {
-  background: #f4f7f8;
-  border-radius: 0 8px 8px 0;
+  background: #1e1e1e;
+  border-radius: 8px;
 }
 
 .drop-down::-webkit-scrollbar-thumb {
