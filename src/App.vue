@@ -35,8 +35,8 @@
 			<div class="converter">
 				<div class="input">
 					<div class="left-box" @click="showDropDown2 = !showDropDown2">
-						<span id="currency-name">{{ activeCurrenciy2.name }}</span>
-						<span id="currency-country">{{ activeCurrenciy2.country }}</span>
+						<span class="currency-name">{{ activeCurrenciy2.name }}</span>
+						<span class="currency-country">{{ activeCurrenciy2.country }}</span>
 					</div>
 					<div class="right-box">
 						<input 
@@ -151,17 +151,19 @@ main {
 	align-items: center;
 	justify-content: center;
 }
-.input {
-    margin: 8px;
+.converter {
+	margin: 8px;
     padding: 8px;
-    display: flex;
-    flex-direction: row;
-    background-color: #212121;
+	background-color: #212121;
     color: white;
     border-radius: 9px;
-    justify-content: space-between;
 	min-width: 580px;
 	max-width: 580px;
+}
+.input {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 .left-box {
     display: flex;
