@@ -206,8 +206,13 @@ main {
     height: 100%;
     width: 50%;
 }
+.drop-down {
+	max-height: 305px;
+	overflow-y: auto;
+}
 .element {
 	background-color: #212121;
 	cursor: pointer;
+	padding: 12px;
 }
 </style>
