@@ -56,6 +56,23 @@
             "country" : "United Arab Emirates",
             "countryFlag" : "United-Arab-Emirates",
             "valueToUSD" : 3.67
+        },
+        {
+            "id" : 8,
+            "name" : "Dinar",
+            "symbole" : "ALD",
+            "country" : "Algeria",
+            "countryFlag" : "Algeria",
+            "valueToUSD" : 140.4
+        },
+        {
+            "id" : 9,
+            "name" : "Dinar",
+            "symbole" : "LID",
+            "country" : "Libya",
+            "countryFlag" : "Libya",
+            "valueToUSD" : 4.92
         }
+        
     ]
 }
