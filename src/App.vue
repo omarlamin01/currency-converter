@@ -19,6 +19,9 @@
 							@change="convertCurrencies(active, key)"
 						>
 					</div>
+					<div class="remove-btn" v-if="activeCurrencies.length > 2">
+						<div class="btn" @click="removeCurrency(active)">remove</div>
+					</div>
 				</div>
 				<div class="drop-down" v-show="dropDowns[key]">
 					<div
@@ -129,6 +132,9 @@ export default {
 				this.dropDowns.push(false);
 			}
 			this.newDropDown = false;
+		},
+		removeCurrency(currency) {
+			this.activeCurrencies.pop(currency)
 		},
 		convertOnce(from, to) {
 			this.values[to] = (this.values[from] / this.activeCurrencies[from].valueToUSD) * this.activeCurrencies[to].valueToUSD;
