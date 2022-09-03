@@ -15,7 +15,7 @@
 					<div class="right-box">
 						<input
 							type="text"
-							v-model="values[key]"
+							class="currencyInput"
 							:value="formatNumber(values[key], 2)"
 							@change="convertCurrencies(active, key)"
 						>
@@ -31,7 +31,7 @@
 						@click="setCurrency(key, currency)"
 					>
 						<span class="currency-name">{{ currency.name }}</span>
-						<span class="currency-country"> - ({{ currency.country }})</span>
+						<span class="currency-country"> ({{ currency.country }})</span>
 					</div>
 				</div>
 			</div>
@@ -44,7 +44,7 @@
 						@click="addCurrency(currency)"
 					>
 						<span class="currency-name">{{ currency.name }}</span>
-						<span class="currency-country"> - ({{ currency.country }})</span>
+						<span class="currency-country"> ({{ currency.country }})</span>
 					</div>
 				</div>
 			</div>
@@ -55,7 +55,6 @@
 <script>
 /* eslint-disable */
 import data from "@/assets/data/currencies.json";
-import currencyInput from "@/components/currencyInput.vue"
 
 export default {
 	name: "App",
@@ -72,19 +71,17 @@ export default {
 		formatNumber(number, digits) {
 			let floor = parseInt(number);
 			let float = parseInt((number - floor) * Math.pow(10, digits))
-			let arr = floor.toString().split('');
-			if (arr.length > 3) {
+			let str = floor.toString();
+			if (str.length > 3) {
 				floor = "";
-				let j = 0;
-				for(let i = arr.length - 1; i > -1; i--) {
-					if (j < 3) {
-						floor = arr[i] + floor;
-						j++;
-					} else {
-						floor = ',' + floor;
-						j = 0;
-					}
-					console.log(floor);
+				let triples = [];
+				let nbTriples = Math.ceil(str.length / 3);
+				for(var i = 0; i < nbTriples; i++) {
+					triples.push(str.substring(str.length - (3 * i),str.length - (3 * i + 3)));
+					if(i < nbTriples - 1)
+						floor = ',' + triples[i] + floor;
+					else
+						floor = triples[i] + floor;
 				}
 			}
 			
@@ -93,6 +90,27 @@ export default {
 			} else {
 				return (floor + '.' + float);
 			}
+		},
+		deformatNumber(number) {
+			/*
+			let isFormated = false;
+			Array.from(number.toString()).forEach(digit => {
+				if (digit == ',') {
+					isFormated = true;
+				}
+			})
+			if (isFormated) {
+				let str = number.toString().split(',');
+				number = "";
+				str.forEach(part => {
+					number += part;
+					console.log(number);
+				})
+			}
+			*/
+			number = parseFloat(number);
+			console.log(number);
+			return number;
 		},
 		filterOnce(target) {
 			let newArr = [];
@@ -125,7 +143,7 @@ export default {
 		addCurrency(currency) {
 			if (this.activeCurrencies.length > 0) {
 				this.activeCurrencies.push(currency);
-				this.values.push(formatNumber(this.convertOnce(0, this.activeCurrencies.length - 1), 2));
+				this.values.push(this.formatNumber(this.convertOnce(0, this.activeCurrencies.length - 1), 2));
 				this.dropDowns.push(false);
 			} else {
 				this.activeCurrencies.push(currency);
@@ -135,10 +153,16 @@ export default {
 			this.showAddCurrencyDropDown = false;
 		},
 		removeCurrency(currency) {
-			this.activeCurrencies.pop(currency)
+			let newArr = [];
+			this.activeCurrencies.forEach(element => {
+				if (element.id != currency.id) {
+					newArr.push(element);
+				}
+			});
+			this.activeCurrencies = newArr;
 		},
 		convertOnce(from, to) {
-			this.values[to] = (this.values[from] / this.activeCurrencies[from].valueToUSD) * this.activeCurrencies[to].valueToUSD;
+			this.values[to] = (this.deformatNumber(this.values[from]) / this.activeCurrencies[from].valueToUSD) * this.activeCurrencies[to].valueToUSD;
 		},
 		convertCurrencies(from, position) {
 			this.filterOnce(from).forEach(element => {
@@ -151,10 +175,8 @@ export default {
 			this.dropDowns[position] = false;
 		}
 	},
-	components: {
-		currencyInput
-	},
 	created() {
+		//set first two currencies
 		this.addCurrency(this.currenciesList[Math.floor(Math.random() * this.currenciesList.length)]);
 		this.addCurrency(this.currenciesList[Math.floor(Math.random() * this.currenciesList.length)]);
 	},
