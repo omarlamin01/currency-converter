@@ -20,7 +20,7 @@
 							@keyup="convertCurrencies(active, key)"
 						>
 						<div 
-							class="btn"
+							class="btn-remove"
 							@click="removeCurrency(active)"
 							v-if="activeCurrencies.length > 2"
 							style="cursor: pointer"
@@ -41,7 +41,7 @@
 				</div>
 			</div>
 			<div class="add-button">
-				<div class="btn" @click="showAddCurrencyDropDown = !showAddCurrencyDropDown">+ add</div>
+				<div class="btn" @click="showAddCurrencyDropDown = !showAddCurrencyDropDown">Add</div>
 				<div class="drop-down" v-show="showAddCurrencyDropDown">
 					<div
 						class="element"
@@ -287,12 +287,29 @@ main {
 	overflow-y: auto;
 	margin-top: 12px;
 }
+.btn {
+	padding: 19px 39px 18px 39px;
+	color: #FFF;
+	background-color: #4bc970;
+	font-size: 18px;
+	text-align: center;
+	font-style: normal;
+	border-radius: 5px;
+	width: 100%;
+	border: 1px solid #3ac162;
+	border-width: 1px 1px 3px;
+	box-shadow: 0 -1px 0 rgba(255, 255, 255, 0.1) inset;
+	margin: 20px;
+	cursor: pointer;
+	max-width: 350px;
+	min-width: 350px;
+}
 .drop-down::-webkit-scrollbar {
   width: 8px;
 }
 
 .drop-down::-webkit-scrollbar-track {
-  background: #1e1e1e;
+  background: #191919;
   border-radius: 8px;
 }
 
@@ -304,5 +321,8 @@ main {
 	background-color: #212121;
 	cursor: pointer;
 	padding: 12px;
+}
+.element:hover {
+	background-color: #121212;
 }
 </style>
