@@ -18,6 +18,7 @@
 							class="currencyInput"
 							v-model="values[key]"
 							@change="convertCurrencies(active, key)"
+							@keypress=""
 						>
 					</div>
 					<div class="remove-btn" v-if="activeCurrencies.length > 2">
@@ -69,7 +70,6 @@ export default {
 	},
 	methods: {
 		formatNumber(number, digits) {
-			number = this.deformatNumber(number);
 			let floor = parseInt(number);
 			let float = parseInt((number - floor) * Math.pow(10, digits))
 			let str = floor.toString();
@@ -87,27 +87,30 @@ export default {
 			}
 			
 			if (float < Math.pow(10, (digits - 1))) {
-				return (floor + '.' + float + '0');
+				return (floor + '.' + '0' + float);
 			} else {
 				return (floor + '.' + float);
 			}
 		},
 		deformatNumber(number) {
-			let isFormated = false;
-			Array.from(number.toString()).forEach(digit => {
-				if (digit == ',') {
-					isFormated = true;
-				}
-			})
-			if (isFormated) {
-				let str = number.toString().split(',');
-				number = "";
-				str.forEach(part => {
-					number += part;
-					console.log(">>>" + number);
+			if (number != '') {
+				let isFormated = false;
+				Array.from(number.toString()).forEach(digit => {
+					if (digit == ',') {
+						isFormated = true;
+					}
 				})
-			}
-			return parseFloat(number);
+				if (isFormated) {
+					let str = number.toString().split(',');
+					number = "";
+					str.forEach(part => {
+						number += part;
+						console.log(">>>" + number);
+					})
+				}
+				return parseFloat(number);
+			} else 
+				return number;
 		},
 		filterOnce(target) {
 			let newArr = [];
@@ -160,7 +163,7 @@ export default {
 		},
 		convertOnce(from, to) {
 			this.values[to] = this.formatNumber(((this.deformatNumber(this.values[from]) / this.activeCurrencies[from].valueToUSD) * this.activeCurrencies[to].valueToUSD), 2);
-			this.values[from] = this.formatNumber(this.values[from], 2);
+			this.values[from] = this.formatNumber(this.deformatNumber(this.values[from]), 2);
 		},
 		convertCurrencies(from, position) {
 			this.filterOnce(from).forEach(element => {
@@ -175,8 +178,8 @@ export default {
 	},
 	created() {
 		//set first two currencies
-		this.addCurrency(this.currenciesList[Math.floor(Math.random() * this.currenciesList.length)]);
-		this.addCurrency(this.currenciesList[Math.floor(Math.random() * this.currenciesList.length)]);
+		this.addCurrency(this.currenciesList[0]);
+		this.addCurrency(this.currenciesList[1]);
 	},
 };
 </script>
