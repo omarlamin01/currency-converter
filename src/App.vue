@@ -16,7 +16,7 @@
 						<input
 							type="text"
 							class="currencyInput"
-							:value="formatNumber(values[key], 2)"
+							v-model="values[key]"
 							@change="convertCurrencies(active, key)"
 						>
 					</div>
@@ -69,6 +69,7 @@ export default {
 	},
 	methods: {
 		formatNumber(number, digits) {
+			number = this.deformatNumber(number);
 			let floor = parseInt(number);
 			let float = parseInt((number - floor) * Math.pow(10, digits))
 			let str = floor.toString();
@@ -92,7 +93,6 @@ export default {
 			}
 		},
 		deformatNumber(number) {
-			/*
 			let isFormated = false;
 			Array.from(number.toString()).forEach(digit => {
 				if (digit == ',') {
@@ -104,13 +104,10 @@ export default {
 				number = "";
 				str.forEach(part => {
 					number += part;
-					console.log(number);
+					console.log(">>>" + number);
 				})
 			}
-			*/
-			number = parseFloat(number);
-			console.log(number);
-			return number;
+			return parseFloat(number);
 		},
 		filterOnce(target) {
 			let newArr = [];
@@ -162,7 +159,8 @@ export default {
 			this.activeCurrencies = newArr;
 		},
 		convertOnce(from, to) {
-			this.values[to] = (this.deformatNumber(this.values[from]) / this.activeCurrencies[from].valueToUSD) * this.activeCurrencies[to].valueToUSD;
+			this.values[to] = this.formatNumber(((this.deformatNumber(this.values[from]) / this.activeCurrencies[from].valueToUSD) * this.activeCurrencies[to].valueToUSD), 2);
+			this.values[from] = this.formatNumber(this.values[from], 2);
 		},
 		convertCurrencies(from, position) {
 			this.filterOnce(from).forEach(element => {
