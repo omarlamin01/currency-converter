@@ -17,12 +17,16 @@
 							type="text"
 							class="currencyInput"
 							v-model="values[key]"
-							@change="convertCurrencies(active, key)"
-							@keypress=""
+							@keyup="convertCurrencies(active, key)"
 						>
-					</div>
-					<div class="remove-btn" v-if="activeCurrencies.length > 2">
-						<div class="btn" @click="removeCurrency(active)">remove</div>
+						<div 
+							class="btn"
+							@click="removeCurrency(active)"
+							v-if="activeCurrencies.length > 2"
+							style="cursor: pointer"
+						>
+							X
+						</div>
 					</div>
 				</div>
 				<div class="drop-down" v-show="dropDowns[key]">
@@ -70,8 +74,22 @@ export default {
 	},
 	methods: {
 		formatNumber(number, digits) {
+			//separate integer part & float one
 			let floor = parseInt(number);
-			let float = parseInt((number - floor) * Math.pow(10, digits))
+			let float = (number - floor) * Math.pow(10, digits);
+
+			//format float
+			let major = parseInt((float - parseInt(float)) * 10);
+			major >= 5 
+				? float = parseInt(float) + 1 
+				: float = parseInt(float)
+			;
+			float < Math.pow(10, (digits - 1))
+				? float = '0' + float
+				: float
+			;
+
+			//format integer part
 			let str = floor.toString();
 			if (str.length > 3) {
 				floor = "";
@@ -85,12 +103,7 @@ export default {
 						floor = triples[i] + floor;
 				}
 			}
-			
-			if (float < Math.pow(10, (digits - 1))) {
-				return (floor + '.' + '0' + float);
-			} else {
-				return (floor + '.' + float);
-			}
+			return (floor + '.' + float);
 		},
 		deformatNumber(number) {
 			if (number != '') {
@@ -105,7 +118,6 @@ export default {
 					number = "";
 					str.forEach(part => {
 						number += part;
-						console.log(">>>" + number);
 					})
 				}
 				return parseFloat(number);
@@ -172,7 +184,12 @@ export default {
 		},
 		setCurrency(position, newCurrency) {
 			this.activeCurrencies[position] = newCurrency;
-			this.values[position] = this.convertOnce(0, position);
+			if (position == 0) {
+				this.values[0] = 1.00;
+				this.convertCurrencies(this.activeCurrencies[0], 0);
+			} else {
+				this.values[position] = this.convertOnce(0, position);
+			}
 			this.dropDowns[position] = false;
 		}
 	},
@@ -248,7 +265,7 @@ main {
 }
 .right-box {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     margin-left: 16px;
     margin-right: 16px;
     width: 50%;
@@ -263,7 +280,7 @@ main {
     border: none;
     background: transparent;
     height: 100%;
-    width: 50%;
+    width: 100%;
 }
 .drop-down {
 	max-height: 305px;
