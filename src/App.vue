@@ -323,6 +323,6 @@ main {
 	padding: 12px;
 }
 .element:hover {
-	background-color: #121212;
+  background: radial-gradient(circle, rgba(59,59,59,1) 0%, rgba(33,33,33,1) 100%);
 }
 </style>
