@@ -25,7 +25,7 @@
 							v-if="activeCurrencies.length > 2"
 							style="cursor: pointer"
 						>
-							X
+              <i class="fas fa-times" />
 						</div>
 					</div>
 				</div>
@@ -324,5 +324,11 @@ main {
 }
 .element:hover {
   background: radial-gradient(circle, rgba(59,59,59,1) 0%, rgba(33,33,33,1) 100%);
+}
+.btn-remove {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 15px;
 }
 </style>
