@@ -1,4 +1,4 @@
-# vue-music-player
+# currency-converter
 
 ## Project setup
 ```
