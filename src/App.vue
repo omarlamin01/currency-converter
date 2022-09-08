@@ -21,11 +21,13 @@
 						>
 						<div 
 							class="btn-remove"
-							@click="removeCurrency(active)"
 							v-if="activeCurrencies.length > 2"
-							style="cursor: pointer"
 						>
-              <i class="fas fa-times" />
+              <i
+                  class="fas fa-times"
+                  @click="removeCurrency(active)"
+                  style="cursor: pointer"
+              />
 						</div>
 					</div>
 				</div>
