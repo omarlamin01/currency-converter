@@ -13,7 +13,7 @@
 
 <script>
 /* eslint-disable */
-import './app.css';
+import DaisyUI from 'daisyui'
 
 export default {
 	name: "App",
