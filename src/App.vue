@@ -33,6 +33,8 @@ export default {
 };
 </script>
 
+<style src="./app.css" />
+
 <!--<style scoped>-->
 <!--#app {-->
 <!--	font-family: Avenir, Helvetica, Arial, sans-serif;-->
