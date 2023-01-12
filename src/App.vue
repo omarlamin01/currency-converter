@@ -13,6 +13,8 @@
 
 <script>
 /* eslint-disable */
+import './app.css';
+
 export default {
 	name: "App",
 	data() {
