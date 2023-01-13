@@ -6,7 +6,7 @@
 		</header>
 		<main>
 			<!------------------------------>
-            <button class="btn w-64 rounded-full">Button</button>
+            <button class="btn">Button</button>
 		</main>
   	</div>
 </template>
@@ -15,8 +15,6 @@
 /* eslint-disable */
 export default {
 	name: "App",
-    // import daisyui
-    plugins: [require("daisyui")],
 	data() {
 		return {
             apiLink: "https://v6.exchangerate-api.com/v6/" + this.apiKey + "/latest/" + this.baseCurrency,
