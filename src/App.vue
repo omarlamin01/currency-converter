@@ -61,144 +61,20 @@
 
 <script>
 /* eslint-disable */
-import data from "@/assets/data/currencies.json";
-
 export default {
 	name: "App",
 	data() {
 		return {
-			currenciesList: data.currencies,
-			activeCurrencies: [],
-			values: [],
-			dropDowns: [],
-			showAddCurrencyDropDown: false,
+            apiLink: "https://v6.exchangerate-api.com/v6/" + this.apiKey + "/latest/" + this.baseCurrency,
+            apiKey: "d57569bf593ebb534d9227a5",
+            baseCurrency: "USD",
 		};
 	},
 	methods: {
-		formatNumber(number, digits) {
-			//separate integer part & float one
-			let floor = parseInt(number);
-			let float = (number - floor) * Math.pow(10, digits);
 
-			//format float
-			let major = parseInt((float - parseInt(float)) * 10);
-			major >= 5 
-				? float = parseInt(float) + 1 
-				: float = parseInt(float)
-			;
-			float < Math.pow(10, (digits - 1))
-				? float = '0' + float
-				: float
-			;
-
-			//format integer part
-			let str = floor.toString();
-			if (str.length > 3) {
-				floor = "";
-				let triples = [];
-				let nbTriples = Math.ceil(str.length / 3);
-				for(var i = 0; i < nbTriples; i++) {
-					triples.push(str.substring(str.length - (3 * i),str.length - (3 * i + 3)));
-					if(i < nbTriples - 1)
-						floor = ',' + triples[i] + floor;
-					else
-						floor = triples[i] + floor;
-				}
-			}
-			return (floor + '.' + float);
-		},
-		deformatNumber(number) {
-			if (number != '') {
-				let isFormated = false;
-				Array.from(number.toString()).forEach(digit => {
-					if (digit == ',') {
-						isFormated = true;
-					}
-				})
-				if (isFormated) {
-					let str = number.toString().split(',');
-					number = "";
-					str.forEach(part => {
-						number += part;
-					})
-				}
-				return parseFloat(number);
-			} else 
-				return number;
-		},
-		filterOnce(target) {
-			let newArr = [];
-			let index = 0;
-			this.activeCurrencies.forEach(element => {
-				if (element.id != target.id) {
-					newArr.push({
-						el: element,
-						position: index
-					});
-				}
-				index++;
-			});
-			return newArr;
-		},
-		filterCurrencies() {
-			let newArr = [];
-			this.currenciesList.forEach(element => {
-				let isContained = false;
-				this.activeCurrencies.forEach(target => {
-					if (element.id == target.id)
-						isContained = true;
-				});
-				if (!isContained) {
-					newArr.push(element);
-				}
-			})
-			return newArr;
-		},
-		addCurrency(currency) {
-			if (this.activeCurrencies.length > 0) {
-				this.activeCurrencies.push(currency);
-				this.values.push(this.formatNumber(this.convertOnce(0, this.activeCurrencies.length - 1), 2));
-				this.dropDowns.push(false);
-			} else {
-				this.activeCurrencies.push(currency);
-				this.values.push(1.00);
-				this.dropDowns.push(false);
-			}
-			this.showAddCurrencyDropDown = false;
-		},
-		removeCurrency(currency) {
-			let newArr = [];
-			this.activeCurrencies.forEach(element => {
-				if (element.id != currency.id) {
-					newArr.push(element);
-				}
-			});
-			this.activeCurrencies = newArr;
-		},
-		convertOnce(from, to) {
-			this.values[to] = this.formatNumber(((this.deformatNumber(this.values[from]) / this.activeCurrencies[from].valueToUSD) * this.activeCurrencies[to].valueToUSD), 2);
-			this.values[from] = this.formatNumber(this.deformatNumber(this.values[from]), 2);
-		},
-		convertCurrencies(from, position) {
-			this.filterOnce(from).forEach(element => {
-				this.convertOnce(position, element.position);
-			})
-		},
-		setCurrency(position, newCurrency) {
-			this.activeCurrencies[position] = newCurrency;
-			if (position == 0) {
-				this.values[0] = 1.00;
-				this.convertCurrencies(this.activeCurrencies[0], 0);
-			} else {
-				this.values[position] = this.convertOnce(0, position);
-			}
-			this.dropDowns[position] = false;
-		}
 	},
 	created() {
-		//set first two currencies
-		this.addCurrency(this.currenciesList[0]);
-		this.addCurrency(this.currenciesList[1]);
+		
 	},
 };
 </script>
